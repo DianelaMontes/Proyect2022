@@ -1,0 +1,85 @@
+CREATE DATABASE BD_PROYECTO_LP2;
+USE BD_PROYECTO_LP2;
+
+
+
+create table TB_CARGO(
+CODCAR INT NOT NULL,
+DESCRIP VARCHAR (200)
+);
+alter table TB_CARGO add constraint pk_codcar primary key (codcar);
+
+create table TB_DELITO (
+CODDEL VARCHAR(7) NOT NULL,
+NOMBRE VARCHAR (50)
+);
+
+ALTER table TB_DELITO add constraint pk_coddel primary key (CODDEL);
+	
+
+CREATE TABLE TB_COMISARIA(
+CODCOM VARCHAR(7) NOT NULL,
+NOMCOM VARCHAR(40) NOT NULL,
+UBICACION VARCHAR(40) NOT NULL
+);
+
+alter table TB_COMISARIA add constraint pk_codcom primary key (CODCOM);
+
+-- tabla policia
+CREATE TABLE TB_POLICIA(
+CODPOL VARCHAR(7) NOT NULL,
+NOMPOL VARCHAR(35) NOT NULL,
+APEPOL VARCHAR(35) NOT NULL,
+CARGO INT,
+DNI CHAR(8) NOT NULL,
+CODCOM VARCHAR(7) NOT NULL,
+SEXO VARCHAR(9) NOT NULL
+);
+alter table TB_POLICIA add constraint pk_coddnipol primary key (CODPOL,DNI);
+alter table TB_POLICIA add constraint fk_codcom foreign key (CODCOM) REFERENCES TB_COMISARIA(CODCOM);
+alter table TB_POLICIA add constraint fk_carpol foreign key (CARGO) references TB_CARGO(CODCAR);
+
+-- tabla preso
+CREATE TABLE TB_AGRESOR(
+CODAGR VARCHAR(7) NOT NULL,
+NOMAGR VARCHAR(35) NOT NULL,
+APEAGR VARCHAR(35) NOT NULL,
+DNI CHAR(8) NOT NULL,
+SEXO VARCHAR(9) NOT NULL
+);
+alter table TB_AGRESOR add constraint pk_coddniagr primary key (CODAGR, DNI);
+
+-- tabla victima
+CREATE TABLE TB_VICTIMA(
+CODVIC CHAR(7) NOT NULL,
+NOMVIC VARCHAR(35) NOT NULL,
+APEVIC VARCHAR(35) NOT NULL,
+DNI CHAR(8) NOT NULL,
+SEXO VARCHAR(9) NOT NULL
+);
+alter table TB_VICTIMA add constraint pk_coddnivic primary key (CODVIC,DNI);
+
+
+-- SECCIÓN: REPORTES
+CREATE TABLE TB_DENUNCIA(
+NUMDEN VARCHAR(7) NOT NULL,
+CODCOM VARCHAR(7) NOT NULL,
+CODDEL VARCHAR(40) NOT NULL,
+DESCRIP varchar(500),
+CODPOL VARCHAR(7) NOT NULL,
+CODAGR VARCHAR(7) ,
+CODVIC VARCHAR(7) NOT NULL,
+FECHA DATE NOT NULL,
+estado boolean default 0
+);
+alter table TB_DENUNCIA add constraint pk_numden primary key (NUMDEN);
+alter table TB_DENUNCIA add constraint fk_comden foreign key (CODCOM) REFERENCES TB_COMISARIA(CODCOM);
+alter table TB_DENUNCIA add constraint fk_coddel foreign key (CODDEL) references TB_DELITO (CODDEL);
+alter table TB_DENUNCIA add constraint fk_denpol foreign key (CODPOL) REFERENCES TB_POLICIA(CODPOL);
+alter table TB_DENUNCIA add constraint fk_denagr foreign key (CODAGR) REFERENCES TB_AGRESOR(CODAGR);
+alter table TB_DENUNCIA add constraint fk_denvic foreign key (CODVIC) REFERENCES TB_VICTIMA(CODVIC);
+
+
+
+
+
