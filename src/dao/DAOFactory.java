@@ -1,5 +1,6 @@
 package dao;
 
+import interfaces.AgresorDAO;
 import interfaces.PoliciaDAO;
 
 public abstract class DAOFactory {
@@ -8,6 +9,7 @@ public abstract class DAOFactory {
 
 	// Trae tantas interfaces como tengas
 	public abstract PoliciaDAO getPolicia();
+	public abstract AgresorDAO getAgresor();
 	
 	public static DAOFactory getDAOFactory(int whichFactory) {
 		switch(whichFactory) {
