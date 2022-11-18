@@ -10,6 +10,6 @@ public interface AgresorDAO {
 	public AgresorDTO buscarAgresor(String dni );
 	public int registrarAgresor(AgresorDTO obj);
 	public int actualizarAgresor(AgresorDTO obj);
-	public int eliminarAgresor(int dni);
+	public int eliminarAgresor(String dni);
 	
 }

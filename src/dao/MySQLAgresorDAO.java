@@ -102,14 +102,42 @@ public class MySQLAgresorDAO implements AgresorDAO {
 
 	@Override
 	public int actualizarAgresor(AgresorDTO obj) {
-		// TODO Auto-generated method stub
-		return 0;
+		int estado = -1;
+		Connection cn = null;
+		PreparedStatement pstm = null;
+		
+		try {
+			cn = MySqlDbConexion.getConexion();
+			String sql = "update TB_AGRESOR set NOMAGR=?, APEAGR=? where dni=?";
+			pstm = cn.prepareStatement(sql);
+			pstm.setString(1, obj.getNomagr());
+			pstm.setString(2, obj.getApeagr());
+			pstm.setString(3, obj.getDni());
+			estado = pstm.executeUpdate();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return estado;
 	}
 
 	@Override
-	public int eliminarAgresor(int dni) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int eliminarAgresor(String dni) {
+		int estado = -1;
+		Connection cn = null;
+		PreparedStatement pstm = null;
+		
+		try {
+			cn = MySqlDbConexion.getConexion();
+			String sql = "delete from TB_AGRESOR where dni=?";
+			pstm = cn.prepareStatement(sql);
+			pstm.setString(1, dni);
+			estado = pstm.executeUpdate();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return estado;
 	}
 
 }
