@@ -7,5 +7,7 @@ import beans.PoliciaDTO;
 public interface PoliciaDAO {
 	
 	public List<PoliciaDTO> listarPolicias();
+	
+	
 
 }
