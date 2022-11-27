@@ -46,7 +46,10 @@ public class ServletDenuncia extends HttpServlet {
 
 	      
 	  	private void registrar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			/*
+			
+	  		
+	  		
+	  		/*
 				int marca, stock;
 		String des = request.getParameter("txt_des");
 		double pre = Double.parseDouble(request.getParameter("txt_pre"));
@@ -64,10 +67,10 @@ public class ServletDenuncia extends HttpServlet {
 
 		
 		private void listar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			/*
-			request.setAttribute("data", serviProducto.listaProducto());
-		request.getRequestDispatcher("listarProducto.jsp").forward(request, response);
-			*/
-		}
+			
+			request.setAttribute("data", serviDenuncia.listarDenuncia());
+			request.getRequestDispatcher("listarDenuncia.jsp").forward(request, response);
+			
+	}
 	      
 }
